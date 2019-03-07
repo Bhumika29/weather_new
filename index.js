@@ -1,6 +1,5 @@
+
 'use strict';
-var dotenv = require('dotenv');
-dotenv.load();
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -14,8 +13,9 @@ app.use(
     extended: true
   })
 );
-
-
+const path=require("path");
+const server=require("http").createServer(app);
+const io=require("socket.io")(server);
 app.post('/webhook',(req,res) =>{
 	
 	var city=req.body.result.parameters.geoCity;
@@ -55,6 +55,4 @@ function getWeatherCity()
 	return result;
 }
 
-app.listen(process.env.PORT || 8000, function() {
-  console.log("Server up and listening");
-});
+
