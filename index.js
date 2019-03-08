@@ -14,8 +14,8 @@ app.use(
   })
 );
 const path=require("path");
-const server=require("http").createServer(app);
-const io=require("socket.io")(server);
+//const server=require("http").createServer(app);
+//const io=require("socket.io")(server);
 app.post('/webhook',(req,res) =>{
 	//var city="delhi";
 	
@@ -61,3 +61,6 @@ function getWeatherCity(city)
 }
 
 
+app.listen(process.env.PORT || 8000, function() {
+  console.log("Server up and listening");
+});
