@@ -20,6 +20,8 @@ app.post('/webhook',(req,res) =>{
 	//var city="delhi";
 	
 	var city=req.body.result.parameters.geoCity;
+	if(city == null)
+		city="delhi"
 	var w=getWeatherCity(city);
 	return res.json({
     speech: w,
