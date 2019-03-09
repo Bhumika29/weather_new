@@ -19,10 +19,17 @@ const path=require("path");
 app.post('/webhook',(req,res) =>{
 	//var city="delhi";
 	
-	var city=req.body.result.parameters.geoCity;
-	if(city == null)
-		city="delhi"
+//	var city=req.body.result.parameters.geoCity;
+//	if(city == null)
+//		city="Delhi";
+	var city =
+    req.body.result &&
+    req.body.result.parameters &&
+    req.body.result.parameters.geoCity
+      ? req.body.result.parameters.geoCity
+      : "Delhi";
 	var w=getWeatherCity(city);
+	
 	return res.json({
     speech: w,
     displayText: w,
