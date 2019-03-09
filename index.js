@@ -5,6 +5,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 //const uuidv1 = require('uuid/v1');
 const request=require("request");
+var google = require('google');
 var deasync = require('deasync');
 const app = express();
 app.use(bodyParser.json());
@@ -17,17 +18,41 @@ const path=require("path");
 //const server=require("http").createServer(app);
 //const io=require("socket.io")(server);
 app.post('/webhook',(req,res) =>{
-	//var city="delhi";
-	
-//	var city=req.body.result.parameters.geoCity;
-//	if(city == null)
-//		city="Delhi";
+
+
+
+if( req.body.result &&
+    req.body.result.parameters &&
+    req.body.result.parameters.unit)
+{
+google.resultsPerPage = 25;
+var nextCounter = 0;
+
+google('node.js best practices', function (err, res){
+  if (err) console.error(err);
+
+  for (var i = 0; i < res.links.length; ++i) {
+    var link = res.links[i];
+	var w=w+'\n'+link.title + ' - ' + link.href+'\n'+link.description;
+    console.log(link.title + ' - ' + link.href);
+    console.log(link.description + "\n");
+  }
+	return res.json({
+    speech: w,
+    displayText: w,
+    source: "webhook-echo-sample"
+  });
+  
+});
+}
+
 	var city =
     req.body.result &&
     req.body.result.parameters &&
     req.body.result.parameters.geoCity
       ? req.body.result.parameters.geoCity
-      : "Delhi";
+      : loc();
+	 
 	var w=getWeatherCity(city);
 	
 	return res.json({
@@ -40,7 +65,23 @@ app.post('/webhook',(req,res) =>{
 	
 });
 //console.log(w);
+var rlt;
+function loc()
+{
+	rlt=undefined;
+	var req=request("http://ipinfo.io", function(err,response,body) {
+	var loc=JSON.parse(body);
+	console.log(loc);
+	console.log(loc.city);
+    rlt=loc.city;
+});
+while(rlt == undefined){
+		require('deasync').runLoopOnce();
+	}
+		
+	return rlt;
 
+}
 var result;
 function getWeatherCity(city)
 {
