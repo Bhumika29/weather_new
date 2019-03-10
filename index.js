@@ -18,7 +18,7 @@ const path=require("path");
 //const server=require("http").createServer(app);
 //const io=require("socket.io")(server);
 app.post('/webhook',(req,res) =>{
-if( req.body.result && req.body.result.parameters && req.body.result.parameters.unit)
+if( req.body.result && req.body.result.parameters && req.body.result.parameters.searchInfo)
 {
 google.resultsPerPage = 25;
 var nextCounter = 0;
