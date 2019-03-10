@@ -21,8 +21,8 @@ app.post('/webhook',(req,res) =>{
 
 
 
-if( req.body.result && req.body.result.parameters && req.body.result.parameters.unit)
-{
+var l=req.body.result && req.body.result.parameters && req.body.result.parameters.unit?req.body.result.parameters.unit:"Nothing";
+
 google.resultsPerPage = 25;
 var nextCounter = 0;
 var w="";
@@ -43,10 +43,10 @@ google('node.js best practices', function (err, res){
   });
   
 });
-}
 
 
-	var city =
+
+/*	var city =
     req.body.result &&
     req.body.result.parameters &&
     req.body.result.parameters.geoCity
@@ -61,7 +61,7 @@ google('node.js best practices', function (err, res){
     source: "webhook-echo-sample"
   });
   
-	
+	*/
 	
 });
 //console.log(w);
