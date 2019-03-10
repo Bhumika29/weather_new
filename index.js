@@ -18,24 +18,22 @@ const path=require("path");
 //const server=require("http").createServer(app);
 //const io=require("socket.io")(server);
 app.post('/webhook',(req,res) =>{
-
-
-
-var l=req.body.result && req.body.result.parameters && req.body.result.parameters.unit?req.body.result.parameters.unit:"Nothing";
-
+if( req.body.result && req.body.result.parameters && req.body.result.parameters.unit)
+{
 google.resultsPerPage = 25;
 var nextCounter = 0;
 var w="";
 google('node.js best practices', function (err, res){
   if (err) console.error(err);
 
-  for (var i = 0; i < res.links.length; ++i) {
+  for (var i = 0; i < 5; ++i) {
     var link = res.links[i];
-	w=w+'\n'+link.title + ' - ' + link.href+'\n'+link.description;
+	w=w+'Title'+link.title + ' - ' + link.href+'Description'+link.description;
    // console.log(link.title + ' - ' + link.href);
     //console.log(link.description + "\n");
   }
-  //console.log(w);
+ // console.log(w);
+  
 	return res.json({
     speech: w,
     displayText: w,
@@ -43,10 +41,10 @@ google('node.js best practices', function (err, res){
   });
   
 });
+}
 
 
-
-/*	var city =
+	var city =
     req.body.result &&
     req.body.result.parameters &&
     req.body.result.parameters.geoCity
@@ -61,7 +59,7 @@ google('node.js best practices', function (err, res){
     source: "webhook-echo-sample"
   });
   
-	*/
+	
 	
 });
 //console.log(w);
