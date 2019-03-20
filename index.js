@@ -18,8 +18,23 @@ const path=require("path");
 //const io=require("socket.io")(server);
 app.post('/webhook',(req,res) =>{
 
+if(req.body.result && req.body.result.parameters && req.body.result.parameters.any)
+{
+	
+  var speech =
+    req.body.result &&
+    req.body.result.parameters &&
+    req.body.result.parameters.any
+      ? req.body.result.parameters.any
+      : "Seems like some problem. Speak again.";
+  return res.json({
+    speech: speech,
+    displayText: speech,
+    source: "webhook-echo-sample"
+  });
+}
 
-if(req.body.result && req.body.result.parameters && req.body.result.parameters.weather)
+else if(req.body.result && req.body.result.parameters && req.body.result.parameters.weather)
 {
 	var city =
     req.body.result &&
@@ -37,21 +52,7 @@ if(req.body.result && req.body.result.parameters && req.body.result.parameters.w
   });
   
 }
-else if(req.body.result && req.body.result.parameters && req.body.result.parameters.any)
-{
-	
-  var speech =
-    req.body.result &&
-    req.body.result.parameters &&
-    req.body.result.parameters.any
-      ? req.body.result.parameters.any
-      : "Seems like some problem. Speak again.";
-  return res.json({
-    speech: speech,
-    displayText: speech,
-    source: "webhook-echo-sample"
-  });
-}
+
 
 
 });
