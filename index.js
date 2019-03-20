@@ -5,7 +5,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 //const uuidv1 = require('uuid/v1');
 const request=require("request");
-var google = require('google');
 var deasync = require('deasync');
 const app = express();
 app.use(bodyParser.json());
@@ -18,32 +17,10 @@ const path=require("path");
 //const server=require("http").createServer(app);
 //const io=require("socket.io")(server);
 app.post('/webhook',(req,res) =>{
-if( req.body.result && req.body.result.parameters && req.body.result.parameters.searchInfo)
+
+
+if(req.body.result && req.body.result.parameters && req.body.result.parameters.weather)
 {
-google.resultsPerPage = 25;
-var nextCounter = 0;
-var w="";
-google('node.js best practices', function (err, res){
-  if (err) console.error(err);
-
-  for (var i = 0; i < 5; ++i) {
-    var link = res.links[i];
-	w=w+'Title'+link.title + ' - ' + link.href+'Description'+link.description;
-   // console.log(link.title + ' - ' + link.href);
-    //console.log(link.description + "\n");
-  }
- // console.log(w);
-  
-	return res.json({
-    speech: w,
-    displayText: w,
-    source: "webhook-echo-sample"
-  });
-  
-});
-}
-
-
 	var city =
     req.body.result &&
     req.body.result.parameters &&
@@ -59,7 +36,7 @@ google('node.js best practices', function (err, res){
     source: "webhook-echo-sample"
   });
   
-	
+}
 	
 });
 //console.log(w);
