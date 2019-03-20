@@ -37,7 +37,23 @@ if(req.body.result && req.body.result.parameters && req.body.result.parameters.w
   });
   
 }
+else if(req.body.result && req.body.result.parameters && req.body.result.parameters.any)
+{
 	
+  var speech =
+    req.body.result &&
+    req.body.result.parameters &&
+    req.body.result.parameters.any
+      ? req.body.result.parameters.any
+      : "Seems like some problem. Speak again.";
+  return res.json({
+    speech: speech,
+    displayText: speech,
+    source: "webhook-echo-sample"
+  });
+}
+
+
 });
 //console.log(w);
 var rlt;
