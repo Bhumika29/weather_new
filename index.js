@@ -143,24 +143,7 @@ else if(req.body.result && req.body.result.parameters && req.body.result.paramet
 	
 	
 }
-else if(req.body.result && req.body.result.parameters && req.body.result.parameters.time)
-{
 
-var date = new Date();
-var current_hour = date.getHours();
-var hour=(current_hour-6) % 24;
-console.log(current_hour);
-var min=date.getMinutes();
-min=(min-30)%60;
-console.log(min);
-var w="Time is "+ hour + ":"+ min;
- return res.json({
-          speech: w,
-          displayText: w,
-          source: "joke"
-        });
-	
-}
 else if(req.body.result && req.body.result.parameters && req.body.result.parameters.search)
 {
     var query= req.body.result &&
