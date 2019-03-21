@@ -52,7 +52,47 @@ else if(req.body.result && req.body.result.parameters && req.body.result.paramet
   });
   
 }
+else if(req.body.result && req.body.result.parameters && req.body.result.parameters.joke)
+{
 
+  //	if(city == null)
+  //		city="Delhi";
+        var w=getJoke();
+        return res.json({
+          speech: w,
+          displayText: w,
+          source: "joke"
+        }); 
+  
+
+var r;
+function getJoke()
+{
+	r=undefined;
+	const request = require('request');
+
+//let apiKey = '392e5b9bd00f4c5c35a0533f7abbac5d';
+//let city = 'portland';
+let url = `https://api.yomomma.info/`
+request(url, function (err, response, body) {
+  if(err){
+    console.log('error:', error);
+  } else {
+    let weather = JSON.parse(body);
+    let message = `It's ${weather.joke}!`;
+    console.log(message);
+    result=message;
+  }
+
+});
+	while(r == undefined){
+		require('deasync').runLoopOnce();
+	}
+		
+	return r;
+}
+	
+}
 
 
 });
