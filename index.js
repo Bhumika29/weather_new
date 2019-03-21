@@ -151,9 +151,9 @@ var current_hour = date.getHours();
 var hour=(current_hour-5) % 24;
 console.log(current_hour);
 var min=date.getMinutes();
-min=(min-20)%60;
+min=(min-30)%60;
 console.log(min);
-var w="Time is "+ current_hour + ":"+ min;
+var w="Time is "+ hour + ":"+ min;
  return res.json({
           speech: w,
           displayText: w,
