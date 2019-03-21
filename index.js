@@ -81,7 +81,7 @@ request(url, function (err, response, body) {
     let weather = JSON.parse(body);
     let message = `It's ${weather.joke}!`;
     console.log(message);
-    result=message;
+    r=message;
   }
 
 });
