@@ -93,8 +93,44 @@ request(url, function (err, response, body) {
 }
 	
 }
+else if(req.body.result && req.body.result.parameters && req.body.result.parameters.quote)
+{
+        var w=getQuote();
+        return res.json({
+          speech: w,
+          displayText: w,
+          source: "quotee"
+        }); 
+  
 
+var result;
+function getQuote()
+{
+	result=undefined;
+	const request = require('request');
 
+//let apiKey = '392e5b9bd00f4c5c35a0533f7abbac5d';
+//let city = 'portland';
+let url = `https://random-math-quote-api.herokuapp.com/`
+request(url, function (err, response, body) {
+  if(err){
+    console.log('error:', error);
+  } else {
+    let q = JSON.parse(body);
+    let message = `It's ${q.quote}!`;
+    console.log(message);
+    result=message;
+  }
+
+});
+	while(result == undefined){
+		require('deasync').runLoopOnce();
+	}
+		
+	return result;
+}
+
+}
 });
 //console.log(w);
 var rlt;
