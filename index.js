@@ -131,6 +131,56 @@ request(url, function (err, response, body) {
 }
 
 }
+else if(req.body.result && req.body.result.parameters && req.body.result.parameters.search)
+{
+    var query= req.body.result &&
+    req.body.result.parameters &&
+    req.body.result.parameters.search
+      ? req.body.result.parameters.search
+      : 'chatbot';
+  	
+  //	if(city == null)
+  //		city="Delhi";
+        var w=search(query);
+        return res.json({
+          speech: w,
+          displayText: w,
+          source: "wikisearch"
+        }); 
+ 
+
+var result;
+function search(query)
+{
+	result=undefined;
+	const request = require('request');
+
+//let apiKey = '392e5b9bd00f4c5c35a0533f7abbac5d';
+//let city = 'portland';
+let url = "https://en.wikipedia.org/w/api.php?action=opensearch&search="+ query +"&format=json"
+request(url, function (err, response, body) {
+  if(err){
+    console.log('error:', error);
+  } else {
+    var wiki = JSON.parse(body);
+    for (var i = 0; i < 1; i++) {
+       var data = `You searched for ${wiki[1][i]}: And these are the  details — ${wiki[2][i]} Follow this link to read more — ${wiki[3][i]}` + '\n';
+        console.log(data);
+    }
+    result=data;
+  }
+
+});
+	while(result == undefined){
+		require('deasync').runLoopOnce();
+	}
+		
+	return result;
+}	
+	
+}
+	
+
 });
 //console.log(w);
 var rlt;
