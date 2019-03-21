@@ -131,6 +131,34 @@ request(url, function (err, response, body) {
 }
 
 }
+else if(req.body.result && req.body.result.parameters && req.body.result.parameters.date)
+{
+	var datetime = new Date();
+    var w="Date is " +datetime.toISOString().slice(0,10);
+	 return res.json({
+          speech: w,
+          displayText: w,
+          source: "joke"
+        });
+	
+	
+}
+else if(req.body.result && req.body.result.parameters && req.body.result.parameters.time)
+{
+
+var date = new Date();
+var current_hour = date.getHours();
+console.log(current_hour);
+var min=date.getMinutes();
+console.log(min);
+var w="Time is "+ current_hour + "hours and "+ min + "minutes";
+ return res.json({
+          speech: w,
+          displayText: w,
+          source: "joke"
+        });
+	
+}
 else if(req.body.result && req.body.result.parameters && req.body.result.parameters.search)
 {
     var query= req.body.result &&
