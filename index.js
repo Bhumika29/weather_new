@@ -151,7 +151,7 @@ var current_hour = date.getHours();
 console.log(current_hour);
 var min=date.getMinutes();
 console.log(min);
-var w="Time is "+ current_hour + "hours and "+ min + "minutes";
+var w="Time is "+ current_hour + ":"+ min;
  return res.json({
           speech: w,
           displayText: w,
