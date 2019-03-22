@@ -52,6 +52,38 @@ else if(req.body.result && req.body.result.parameters && req.body.result.paramet
   });
   
 }
+else if(req.body.result && req.body.result.parameters && req.body.result.parameters.die)
+{
+	      var w=die();
+        return res.json({
+          speech: w,
+          displayText: w,
+          source: "Places"
+        }); 
+  
+
+var result;
+function die()
+{
+  var resu;
+	var coin=Math.floor(Math.random() * 2);
+  if(coin==0)
+  {
+    resu='heads';
+    console.log('heads');}
+  else{
+    resu='tails';
+    console.log('tails');
+  }
+  result=resu;
+	while(result == undefined){
+		require('deasync').runLoopOnce();
+	}
+
+	return result;
+}
+	
+}
 else if(req.body.result && req.body.result.parameters && req.body.result.parameters.joke)
 {
 
