@@ -54,7 +54,7 @@ else if(req.body.result && req.body.result.parameters && req.body.result.paramet
 }
 else if(req.body.result && req.body.result.parameters && req.body.result.parameters.coin)
 {
-	      var w=die();
+	      var w=coin();
         return res.json({
           speech: w,
           displayText: w,
@@ -62,7 +62,6 @@ else if(req.body.result && req.body.result.parameters && req.body.result.paramet
         }); 
   
 
-var result;
 var result;
 function coin()
 {
@@ -94,7 +93,7 @@ else if(req.body.result && req.body.result.parameters && req.body.result.paramet
           displayText: w,
           source: "Places"
         }); 
-		
+		var result;
   function die() {
     var dice=Math.floor(Math.random() * 6);
     dice++;
