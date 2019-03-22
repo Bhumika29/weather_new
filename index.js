@@ -93,17 +93,19 @@ else if(req.body.result && req.body.result.parameters && req.body.result.paramet
           displayText: w,
           source: "Places"
         }); 
-		var result;
+
+	var result;
   function die() {
     var dice=Math.floor(Math.random() * 6);
-    dice++;
-    resu=dice;
+    dice=dice+1;
+    resu='Its '+ dice;
 	result=resu;
 	while(result == undefined){
 		require('deasync').runLoopOnce();
 	}
 	return result;
 }
+
 }
 
 
