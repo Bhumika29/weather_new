@@ -95,7 +95,7 @@ else if(req.body.result && req.body.result.parameters && req.body.result.paramet
         }); 
 
 var result;
-function coin()
+function die()
 {
   var resu;
 	var coin=Math.floor(Math.random() * 6);
