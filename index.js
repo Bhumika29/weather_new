@@ -94,15 +94,40 @@ else if(req.body.result && req.body.result.parameters && req.body.result.paramet
           source: "Places"
         }); 
 
-	var result;
-  function die() {
-    var dice=Math.floor(Math.random() * 6);
-    dice=dice+1;
-    resu='Its '+ dice;
-	result=resu;
+var result;
+function coin()
+{
+  var resu;
+	var coin=Math.floor(Math.random() * 6);
+  if(coin==0)
+  {
+    resu='one';
+  }
+	if(coin==1)
+  {
+    resu='two';
+  }
+	if(coin==2)
+  {
+    resu='three';
+  }
+	if(coin==3)
+  {
+    resu='four';
+  }
+	if(coin==4)
+  {
+    resu='five';
+  }
+	if(coin==5)
+  {
+    resu='six';
+  }
+  result=resu;
 	while(result == undefined){
 		require('deasync').runLoopOnce();
 	}
+
 	return result;
 }
 
