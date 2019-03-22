@@ -52,7 +52,7 @@ else if(req.body.result && req.body.result.parameters && req.body.result.paramet
   });
   
 }
-else if(req.body.result && req.body.result.parameters && req.body.result.parameters.die)
+else if(req.body.result && req.body.result.parameters && req.body.result.parameters.coin)
 {
 	      var w=die();
         return res.json({
@@ -63,7 +63,8 @@ else if(req.body.result && req.body.result.parameters && req.body.result.paramet
   
 
 var result;
-function die()
+var result;
+function coin()
 {
   var resu;
 	var coin=Math.floor(Math.random() * 2);
@@ -83,7 +84,31 @@ function die()
 	return result;
 }
 	
+
 }
+else if(req.body.result && req.body.result.parameters && req.body.result.parameters.die)
+{
+	      var w=die();
+        return res.json({
+          speech: w,
+          displayText: w,
+          source: "Places"
+        }); 
+		
+  function die() {
+    var dice=Math.floor(Math.random() * 6);
+    dice++;
+    resu=dice;
+	result=resu;
+	while(result == undefined){
+		require('deasync').runLoopOnce();
+	}
+	return result;
+}
+}
+
+
+
 else if(req.body.result && req.body.result.parameters && req.body.result.parameters.joke)
 {
 
